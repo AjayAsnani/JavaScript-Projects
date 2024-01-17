@@ -1,0 +1,77 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Countdown timer</title>
+    <style>
+      body {
+        text-align: center;
+        font-family: sans-serif;
+        background: linear-gradient(to right, #333, #000);
+      }
+
+      #clock {
+        color: #fff;
+        margin-top: 100px;
+      }
+
+      #subheading {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+
+      #countdown {
+        font-size: 72px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="clock">
+      <h2 id="subheading">Time Remaining</h2>
+      <div id="countdown">
+        <span id="days"></span>
+        <span id="hours"></span>
+        <span>:</span>
+        <span id="minutes"></span>
+        <span>:</span>
+        <span id="seconds"></span>
+      </div>
+    </div>
+    <script>
+      const countdownTarget = new Date("2024-02-20 04:00:00"); // Set your target date and time here
+      const countdown = document.getElementById("countdown");
+
+      function countdownTimer() {
+        const now = new Date();
+        const distance = countdownTarget - now;
+
+        if (distance < 0) {
+          clearInterval(countdownInterval);
+          countdown.textContent = "EXPIRED";
+          return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("days").textContent = `${days}d`;
+        document.getElementById("hours").textContent = `${
+          hours < 10 ? `0${hours}` : hours
+        }h`;
+        document.getElementById("minutes").textContent = `${
+          minutes < 10 ? `0${minutes}` : minutes
+        }m`;
+        document.getElementById("seconds").textContent = `${
+          seconds < 10 ? `0${seconds}` : seconds
+        }s`;
+      }
+
+      const countdownInterval = setInterval(countdownTimer, 1000);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,85 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Digital Clock</title>
+    <style>
+      body {
+        text-align: center;
+        font-family: sans-serif;
+        background: linear-gradient(to right, #333, #000);
+      }
+
+      #clock {
+        color: #fff;
+        margin-top: 100px;
+      }
+
+      #subheading {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+
+      #time {
+        font-size: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #day,
+      #hour,
+      #minute,
+      #second {
+        font-size: 50px;
+        margin-right: 10px;
+      }
+
+      #minute,
+      #second {
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="clock">
+      <h2 id="subheading">Live Time</h2>
+      <div id="time">
+        <span id="day"></span>
+        <span id="hour"></span>
+        <span>:</span>
+        <span id="minute"></span>
+        <span>:</span>
+        <span id="second"></span>
+      </div>
+    </div>
+    <script>
+      function showTime() {
+        const now = new Date();
+        const days = [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ][now.getDay()];
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const seconds = now.getSeconds();
+
+        document.getElementById("day").textContent = days;
+        document.getElementById("hour").textContent =
+          hours < 10 ? `0${hours}` : hours;
+        document.getElementById("minute").textContent =
+          minutes < 10 ? `0${minutes}` : minutes;
+        document.getElementById("second").textContent =
+          seconds < 10 ? `0${seconds}` : seconds;
+      }
+
+      setInterval(showTime, 1000); // Update every second
+    </script>
+  </body>
+</html>
